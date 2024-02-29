@@ -7,11 +7,11 @@
         _Bool has_errored;                                   \
     } type;                                                   \
 
-#define Result_t_funcs(ok_type, error_type, tpye)                                                            \
-    tpye tpye##Ok(ok_type ok){return (tpye) {ok, 0};};                                                        \
-    tpye tpye##error(error_type error){return (tpye) {error, 1};};                                             \
-    ok_type tpye##unwrap(tpye result){if (!result.has_errored) {return result.data.ok;} exit(1);}               \
-    ok_type tpye##unwrapor(tpye result, ok_type or){if (!result.has_errored) {return result.data.ok;} return or;}\
+#define Result_t_funcs(ok_type, error_type, type)                                                            \
+    type type##Ok(ok_type ok){return (type) {ok, 0};};                                                        \
+    type type##error(error_type error){return (type) {error, 1};};                                             \
+    ok_type type##unwrap(type result){if (!result.has_errored) {return result.data.ok;} exit(1);}               \
+    ok_type type##unwrapor(type result, ok_type or){if (!result.has_errored) {return result.data.ok;} return or;}\
     
 //you must call this with a type def to avoid complier checks
 #define Result_t(ok_type, error_type, type)\
